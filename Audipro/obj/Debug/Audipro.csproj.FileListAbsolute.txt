@@ -1,0 +1,5 @@
+C:\Users\melar\OneDrive\Documentos\SharpDevelop Projects\Audipro\Audipro\obj\Debug\Audipro.csprojResolveAssemblyReference.cache
+C:\Users\melar\OneDrive\Documentos\SharpDevelop Projects\Audipro\Audipro\bin\Debug\Audipro.exe
+C:\Users\melar\OneDrive\Documentos\SharpDevelop Projects\Audipro\Audipro\bin\Debug\Audipro.pdb
+C:\Users\melar\OneDrive\Documentos\SharpDevelop Projects\Audipro\Audipro\obj\Debug\Audipro.exe
+C:\Users\melar\OneDrive\Documentos\SharpDevelop Projects\Audipro\Audipro\obj\Debug\Audipro.pdb
