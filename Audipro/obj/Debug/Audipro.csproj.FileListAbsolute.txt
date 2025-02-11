@@ -3,3 +3,13 @@ C:\Users\melar\OneDrive\Documentos\SharpDevelop Projects\Audipro\Audipro\bin\Deb
 C:\Users\melar\OneDrive\Documentos\SharpDevelop Projects\Audipro\Audipro\bin\Debug\Audipro.pdb
 C:\Users\melar\OneDrive\Documentos\SharpDevelop Projects\Audipro\Audipro\obj\Debug\Audipro.exe
 C:\Users\melar\OneDrive\Documentos\SharpDevelop Projects\Audipro\Audipro\obj\Debug\Audipro.pdb
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\bin\Debug\Audipro.exe
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\bin\Debug\Audipro.pdb
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\obj\Debug\Audipro.csprojResolveAssemblyReference.cache
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\obj\Debug\Audipro.MainForm.resources
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\obj\Debug\Audipro.csproj.GenerateResource.Cache
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\obj\Debug\Audipro.exe
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\obj\Debug\Audipro.pdb
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\bin\Debug\RoundedButton.dll
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\bin\Debug\RoundedButton.pdb
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\obj\Debug\Audipro.Form1.resources
