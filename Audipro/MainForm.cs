@@ -19,16 +19,19 @@ namespace Audipro
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		public Sistemas m;
 		public MainForm()
 		{
-			//
-			// The InitializeComponent() call is required for Windows Forms designer support.
-			//
 			InitializeComponent();
+			m = new Sistemas();
+			m.Guardar();
+			MessageBox.Show("Pausa","Mensaje");
+			m.Recuperar();
+			foreach(Sistema w in m.Datos)
+			{
+				MessageBox.Show(w.ToString());
+			}
 			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
 		}
 		
 		private void Form1_Paint(object sender, PaintEventArgs e)
