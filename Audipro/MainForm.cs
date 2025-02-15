@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Text.RegularExpressions;
 
 namespace Audipro
 {
@@ -19,15 +20,19 @@ namespace Audipro
 	/// </summary>
 	public partial class MainForm : Form
 	{
-		public Sistemas m;
+		public Usuarios m;
 		public MainForm()
 		{
 			InitializeComponent();
-			m = new Sistemas();
+			this.WindowState = FormWindowState.Maximized;
+			m = new Usuarios();
+		
+			
 			m.Guardar();
-			MessageBox.Show("Pausa","Mensaje");
 			m.Recuperar();
-			foreach(Sistema w in m.Datos)
+			MessageBox.Show("Pausa","Mensaje");
+		
+			foreach(Usuario w in m.Datos)
 			{
 				MessageBox.Show(w.ToString());
 			}
@@ -53,33 +58,18 @@ namespace Audipro
 				
 				
 				ReiniciarBotones();
-				Panel1.Visible=true;
-			BotonInicio.BackgroundColor = Color.DarkBlue;
-			BotonInicio.ForeColor = Color.WhiteSmoke;
+
 		}
 	
 		void ReiniciarBotones(){
-			BotonInicio.ForeColor = Color.Black;
-			BotonInicio.BackgroundColor = Color.Transparent;
-			BotonSistemas.ForeColor = Color.Black;
-			BotonSistemas.BackgroundColor = Color.Transparent;
-			BotonProcesos.ForeColor = Color.Black;
-			BotonProcesos.BackgroundColor = Color.Transparent;
-			BotonAuditores.ForeColor = Color.Black;
-			BotonAuditores.BackgroundColor = Color.Transparent;
-			Panel1.Visible=false;
-			Panel2.Visible=false;
-			Panel3.Visible=false;
-			Panel4.Visible=false;
+
 		}
 		
 		void BotonSistemasClick(object sender, EventArgs e)
 		{	
 		
 			ReiniciarBotones();
-			Panel2.Visible=true;
-			BotonSistemas.BackgroundColor = Color.DarkBlue;
-			BotonSistemas.ForeColor = Color.WhiteSmoke;
+
 			
 			
 		}
@@ -87,17 +77,73 @@ namespace Audipro
 		void BotonProcesosClick(object sender, EventArgs e)
 		{
 			ReiniciarBotones();
-			Panel3.Visible=true;
-			BotonProcesos.BackgroundColor = Color.DarkBlue;
-			BotonProcesos.ForeColor = Color.WhiteSmoke;
+
 		}
 		
 		void BotonAuditoresClick(object sender, EventArgs e)
 		{
 			ReiniciarBotones();
-			Panel4.Visible=true;
-			BotonAuditores.BackgroundColor = Color.DarkBlue;
-			BotonAuditores.ForeColor = Color.WhiteSmoke;
+	
+		}
+		
+		void Label2Click(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void InicioBtnClick(object sender, EventArgs e)
+		{
+			
+				m.Recuperar();
+			
+			
+
+			foreach (Usuario x in m.Datos) {
+				if(x.NombreUsuario == usurioText.Text){
+					
+				}else{
+					MessageBox.Show("Pausa","Usuario InValido");
+				}
+			}
+				
+		}
+		
+		bool FormatoDeCodigoCorrecto(String texto){
+			string patron = @"\d";
+			string patron2 = @".{8,}";
+			
+			Regex numero = new Regex(patron);
+			Regex ocho= new Regex(patron2);
+			
+			bool tieneNumero= numero.IsMatch(texto);
+			bool tieneOcho = ocho.IsMatch(texto);
+			
+			
+			if(!tieneNumero){
+				MessageBox.Show("La contraseña debe tener al menos un numero","Error");
+				return false;
+			} 
+			else if(!tieneOcho) {
+				MessageBox.Show("La contraseña debe tener al menos Ocho caracteres","Error");
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+		void CrearBtnClick(object sender, EventArgs e)
+		{
+			if(String.IsNullOrWhiteSpace(usurioText.Text)||String.IsNullOrWhiteSpace(contraseñaText.Text))
+			{
+			   	MessageBox.Show("Debe Rellenar todos los campos", "Campos faltantes");
+			   	
+			}else{
+				if(FormatoDeCodigoCorrecto(contraseñaText.Text)){
+				   	m.Datos.Add(new Usuario(usurioText.Text,contraseñaText.Text));
+				   	            m.Guardar();
+				   }
+			}
+			
 		}
 	}
 }

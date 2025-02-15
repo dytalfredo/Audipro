@@ -13,3 +13,4 @@ C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\obj\Debug\Aud
 C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\bin\Debug\RoundedButton.dll
 C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\bin\Debug\RoundedButton.pdb
 C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\obj\Debug\Audipro.Form1.resources
+C:\Users\dytal\OneDrive\Documentos\Code\IUJO CODES\Audipro\Audipro\obj\Debug\Audipro.Inicio.resources

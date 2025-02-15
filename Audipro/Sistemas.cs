@@ -21,23 +21,23 @@ namespace Audipro
 		
 		public Sistemas()
 		{
-			_datos = new List<Sistema>();
-			_datos.Add( new Sistema("Sistema 1","Tesla", "Calle Mis amores", "j0132456432", DateTime.Now, DateTime.Now));
-			
+			_datos = new List<Sistema>(); //crear la lista
+			_datos.Add( new Sistema("Sistema 1","Tesla", "Calle Mis amores", "j0132456432", new DateTime(2023,5,2), new DateTime(2024,5,2)));
+			_datos.Add( new Sistema("Sistema Grande","Unloked", "Los Leones", "j053245644", new DateTime(2023,5,2), new DateTime(2024,5,2)));			
 		}
 		
 		public void Guardar()
 		{
 			
 			FileStream _archivoCreado = new FileStream(_archivo,FileMode.OpenOrCreate);
-			BinaryWriter _streamDatos = new BinaryWriter(_archivoCreado, En);
+			BinaryWriter _streamDatos = new BinaryWriter(_archivoCreado, Encoding.UTF8);
 			foreach (Sistema _j in _datos)
 			{
 				Console.WriteLine(_j);
-				String _lienaDeTexto = Escribir(_j);
-				_streamDatos.WriteLine(_lienaDeTexto);
+				Linea_Sistema(_streamDatos, _j);
 			}
 			_streamDatos.Close();
+			MessageBox.Show("Componentes guardados en el Archivo Componente_01.txt","Salida");
 		}
 		
 		private String Escribir(Sistema objeto) 
@@ -56,29 +56,47 @@ namespace Audipro
 		public void Recuperar()
 		{
 			_datos.Clear();
-			FileStream _archivoCreado = new FileStream(_archivo,FileMode.Open,FileAccess.Read);
-			StreamReader _streamDatos = new StreamReader(_archivoCreado);
-			String _r = _streamDatos.ReadLine();
-			while (_r != null)
-			{
-				_datos.Add(Leer(_r));
-			    _r = _streamDatos.ReadLine();
-			}
+			FileStream _archivoCreado = new FileStream(_archivo,FileMode.Open);
+			BinaryReader _streamDatos = new BinaryReader(_archivoCreado, Encoding.UTF8);
+			_datos.Add(Leer(_streamDatos));
 			_streamDatos.Close();
 		}
 		
-		
-		
-		private Sistema Leer(String x)
+		public void Linea_Sistema(BinaryWriter streameDatos, Sistema x)
 		{
+			streameDatos.Write(x.NombreSistema);
+			streameDatos.Write(x.NombreEmpresa);
+			streameDatos.Write(x.DireccionEmpresa);
+			streameDatos.Write(x.RifEmpresa);
+			streameDatos.Write(x.FechaInicio.Day);
+			streameDatos.Write(x.FechaInicio.Month);
+			streameDatos.Write(x.FechaInicio.Year);
+			streameDatos.Write(x.FechaFinal.Day);
+			streameDatos.Write(x.FechaFinal.Month);
+			streameDatos.Write(x.FechaFinal.Year);
+		
+		}
+		
+		
+		private Sistema Leer(BinaryReader x)
+		{
+		
+			Int32 dI,mI,aI,dF,mF,aF;
+			
 			Sistema h = new Sistema();
-			String[] arregloDeTextos = x.Split(_separador);
-			h.NombreSistema = arregloDeTextos[0];
-			h.NombreEmpresa = arregloDeTextos[1];
-			h.DireccionEmpresa = arregloDeTextos[2];
-			h.RifEmpresa = arregloDeTextos[3];
-			h.FechaInicio = Convert.ToDateTime(arregloDeTextos[4], CultureInfo.InvariantCulture);
-			h.FechaFinal = Convert.ToDateTime(arregloDeTextos[5],CultureInfo.InvariantCulture);
+			h.NombreSistema = x.ReadString();
+			h.NombreEmpresa = x.ReadString();
+			h.DireccionEmpresa = x.ReadString();
+			h.RifEmpresa = x.ReadString();
+			dI= x.ReadInt32();
+			mI= x.ReadInt32();
+			aI= x.ReadInt32();
+			dF= x.ReadInt32();
+			mF= x.ReadInt32();
+			aF= x.ReadInt32();
+			h.FechaInicio = new DateTime(aI,mI,dI);
+			h.FechaFinal =new DateTime(aF,mF,dF);
+			
 		
 			return h;
 		}
