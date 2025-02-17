@@ -16,24 +16,27 @@ namespace Audipro
 	public class Proceso
 	{
 		private String nombreProceso;
-		private Int16 idAuditor;
-		private Int16 idSistema;
+		private String cedulaAuditor;
+		private String rifSistema;
+		private Int16 idProceso;
 		private DateTime fechaProceso;
-		private Int16 horasUsadas;
+		private Int32 horasUsadas;
 		private String resultados;
 		private bool falla;
 		
 		public String NombreProceso {get {return nombreProceso;} set {nombreProceso=value;}}
-		public Int16 IdAuditor {get {return idAuditor;} set { idAuditor=value;}}
-		public Int16 IdSistema {get {return idSistema;} set { idSistema = value;}}
+		public String CedulaAuditor {get {return cedulaAuditor;} set { cedulaAuditor=value;}}
+		public String RifSistema {get {return rifSistema;} set { rifSistema = value;}}
+		public Int16 IdProceso {get {return idProceso;} set {idProceso=value;}}
 		public DateTime FechaProceso { get { return fechaProceso;} set {fechaProceso=value;}}
-		public Int16 HorasUsadas {get {return horasUsadas;} set{horasUsadas=value;}}
+		public Int32 HorasUsadas {get {return horasUsadas;} set{horasUsadas=value;}}
 		public String Resultados {get {return resultados;} set{resultados = value;}}
 		public bool Falla {get{return falla;} set{falla=value;}}
 		
 		
 		public Proceso()
 		{
+			
 		}
 	}
 }

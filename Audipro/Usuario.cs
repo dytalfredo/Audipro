@@ -31,5 +31,11 @@ namespace Audipro
 			nombreUsuario=x;
 			contraseñaUsuario=y;
 		}
+		
+		public override string ToString()
+		{
+			return string.Format("[Usuario NombreUsuario={0}, ContraseñaUsuario={1}]", nombreUsuario, contraseñaUsuario);
+		}
+
 	}
 }

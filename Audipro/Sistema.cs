@@ -13,16 +13,19 @@ namespace Audipro
 	{
 		
 		private String nombreSistema;
-		//private List<int> procesos;
+		private List<Int16> procesos;
 		//private Int16 idSistema;
 		private String nombreEmpresa;
 		private String direccionEmpresa;
 		private String rifEmpresa;
 		private DateTime fechaInicio;
 		private DateTime fechaFinal;
+		private Int16 cantidadProcesos;
 		
 		
-		//public List<Proceso> Procesos {get{return procesos;} set{procesos=value;}}
+		
+		public List<Int16> Procesos {get{return procesos;} set{procesos=value;}}
+		public Int16 CantidadProcesos {get{return cantidadProcesos;} set {cantidadProcesos=value;}}
 		public String NombreSistema { get {return nombreSistema;} set {nombreSistema = value;} }
 		//public  Int16 IdSistema {get {return idSistema;} set{ idSistema= value;}}
 		public String NombreEmpresa { get {return nombreEmpresa;} set {nombreEmpresa = value;} }
@@ -33,15 +36,22 @@ namespace Audipro
 		
 		
 		public Sistema(){
-			
+			procesos = new List<Int16>();
 		}
 		
-		public Sistema(String nS, String nE, String dE, String rE, DateTime fI, DateTime fF)
+		public Sistema(String nS, String nE, String dE, String rE, DateTime fI, DateTime fF, List<Int16> x)
 		{
-			//procesos = new List<Proceso>();
+			procesos = new List<Int16>();
+			procesos= x;
+			cantidadProcesos = Convert.ToInt16( procesos.Count);
 			nombreSistema=nS; nombreEmpresa = nE; direccionEmpresa = dE;
 			rifEmpresa = rE; fechaInicio= fI; fechaFinal = fF;
 			
+		}
+		
+		public void AgregarProceso(Int16 index){
+			procesos.Add(index);
+			cantidadProcesos= Convert.ToInt16( procesos.Count);
 		}
 		
 		public override string ToString()

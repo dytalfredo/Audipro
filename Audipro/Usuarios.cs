@@ -36,12 +36,12 @@ namespace Audipro
 			//ITERANDO DENTRO DE UNA LISTA DE USARIOS
 			foreach (Usuario _j in _datos)
 			{
-				Console.WriteLine(_j);
+				
 				ConvertirUsuario(_streamDatos, _j);
 			}
 			
 			_streamDatos.Close();
-			MessageBox.Show("Componentes guardados en el Archivo Componente_01.txt","Salida");
+			
 		}
 		
 		
@@ -79,7 +79,7 @@ namespace Audipro
         }
         catch (IOException e)
         {
-            Console.WriteLine("Error de E/S durante la lectura: {e.Message}");
+            Console.WriteLine("Error de E/S durante la lectura:"+ e.Message);
             // Manejar errores de lectura dentro del bucle, si es necesario
             break; // o puedes optar por continuar, dependiendo de cómo quieras manejar errores
         }
@@ -105,7 +105,39 @@ namespace Audipro
 		
 		
 			return h;
-		}		
+		}	
+
+	public Usuario Consultar(string nombre)
+        {
+            Usuario usuarioBuscado = null;
+            if(_datos != null){
+            	foreach (Usuario x in _datos)
+				{
+            		if (x.NombreUsuario == nombre)
+	                {
+	                    usuarioBuscado = x;
+	                    break;
+	                }
+	            }
+            }
+
+            if (usuarioBuscado == null)
+            {
+                throw new Exception("El curso no se encuentra registrado.");
+            }
+
+            return usuarioBuscado;
+        }
+
+	public bool existe(String x){
+		foreach (Usuario y in _datos) {
+			if(y.NombreUsuario == x){
+				MessageBox.Show("El usuario ya se encuentra registrado");
+				return true;
+			}
+		}
+		return false;
+	}
 		
 	}
 }

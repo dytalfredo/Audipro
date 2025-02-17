@@ -52,6 +52,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auditor.cs" />
+    <Compile Include="Auditores.cs" />
+    <Compile Include="FormularioAuditores.cs" />
+    <Compile Include="FormularioAuditores.Designer.cs">
+      <DependentUpon>FormularioAuditores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioSistemas.cs" />
+    <Compile Include="FormularioSistemas.Designer.cs">
+      <DependentUpon>FormularioSistemas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormularoProcesos.cs" />
+    <Compile Include="FormularoProcesos.Designer.cs">
+      <DependentUpon>FormularoProcesos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Procesos.cs" />
     <Compile Include="Rounded.cs" />
     <Compile Include="Form1.cs" />
     <Compile Include="Form1.Designer.cs">
@@ -77,6 +92,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormularioAuditores.resx">
+      <DependentUpon>FormularioAuditores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormularioSistemas.resx">
+      <DependentUpon>FormularioSistemas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormularoProcesos.resx">
+      <DependentUpon>FormularoProcesos.Designer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>

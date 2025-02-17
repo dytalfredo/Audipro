@@ -25,18 +25,17 @@ namespace Audipro
 		{
 			InitializeComponent();
 			this.WindowState = FormWindowState.Maximized;
+
+// Centrar todo en el panel interno
+tableLayoutPanelMain.Anchor = AnchorStyles.None;
+
+
 			m = new Usuarios();
 		
 			
 			m.Guardar();
 			m.Recuperar();
-			MessageBox.Show("Pausa","Mensaje");
-		
-			foreach(Usuario w in m.Datos)
-			{
-				MessageBox.Show(w.ToString());
-			}
-			
+
 		}
 		
 		private void Form1_Paint(object sender, PaintEventArgs e)
@@ -62,6 +61,7 @@ namespace Audipro
 		}
 	
 		void ReiniciarBotones(){
+			
 
 		}
 		
@@ -95,17 +95,38 @@ namespace Audipro
 		{
 			
 				m.Recuperar();
-			
-			
-
-			foreach (Usuario x in m.Datos) {
-				if(x.NombreUsuario == usurioText.Text){
+				Usuario x = new Usuario();
+				if(String.IsNullOrWhiteSpace(usuarioText.Text)){
+				   	MessageBox.Show("Para iniciar sesion ingresa un nombre de usuario");
+				   }else{
+				try{
+				x = m.Consultar(usuarioText.Text);
+				if(x!=null){
+					if(ContraseñaCorrecta(x)){
+						MessageBox.Show("USUARIO Legeado","Inicio de Sesion");
+						Form1 nuevoFormulario = new Form1(x.NombreUsuario);
+						nuevoFormulario.ShowDialog();
+						this.Close();
 					
-				}else{
-					MessageBox.Show("Pausa","Usuario InValido");
-				}
-			}
+					}else{
+						MessageBox.Show("USUARIO No Legeado","Contraseña Incorrecta");
+					}}
+					
+				} catch(Exception ex){
+					MessageBox.Show("El Usuario no se encuentra registrado", "Busqueda", MessageBoxButtons.OK);
+				   	}					}}
+		
+	
+		
+		bool ContraseñaCorrecta(Usuario x){
+			if(x.ContraseñaUsuario == contraseñaText.Text){
+				MessageBox.Show("Contraseña Correcta","Error");
+				return true;
+			}else {
 				
+				MessageBox.Show(x.ContraseñaUsuario,"Error");
+				return false;
+			}
 		}
 		
 		bool FormatoDeCodigoCorrecto(String texto){
@@ -132,18 +153,89 @@ namespace Audipro
 		}
 		
 		void CrearBtnClick(object sender, EventArgs e)
+			
 		{
-			if(String.IsNullOrWhiteSpace(usurioText.Text)||String.IsNullOrWhiteSpace(contraseñaText.Text))
+			if(!labelContraseña.Visible){
+				labelUsuario2.Visible=true;
+			labelContraseña.Visible = true;
+			}else{
+			
+			if(String.IsNullOrWhiteSpace(usuarioText.Text)||String.IsNullOrWhiteSpace(contraseñaText.Text))
 			{
 			   	MessageBox.Show("Debe Rellenar todos los campos", "Campos faltantes");
 			   	
-			}else{
-				if(FormatoDeCodigoCorrecto(contraseñaText.Text)){
-				   	m.Datos.Add(new Usuario(usurioText.Text,contraseñaText.Text));
+			}else if(usuarioText.Text.Contains("")){
+			         MessageBox.Show("El nombre de usuario no debe tener espacios en blanco");
+			         }else{
+				
+				
+			
+				if(FormatoDeCodigoCorrecto(contraseñaText.Text) && !m.existe(usuarioText.Text)){
+				   	m.Datos.Add(new Usuario(usuarioText.Text,contraseñaText.Text));
 				   	            m.Guardar();
+				   	            m.Recuperar();
 				   }
+				   
+			}
+			
+			}}
+		
+		void TableLayoutPanelMainPaint(object sender, PaintEventArgs e)
+		{
+			
+		}
+		
+		void Panel5Paint(object sender, PaintEventArgs e)
+		{
+			
+		}
+		
+		void Button3Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+		
+		void Button1Click(object sender, EventArgs e)
+		{
+			if(contraseñaText.PasswordChar=='*'){
+				contraseñaText.PasswordChar='\0';
+			}else{
+				contraseñaText.PasswordChar='*';
 			}
 			
 		}
+		
+		void Button2Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+		
+		void ContraseñaTextKeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Enter){
+				m.Recuperar();
+				Usuario x = new Usuario();
+				if(String.IsNullOrWhiteSpace(usuarioText.Text)){
+				   	MessageBox.Show("Para iniciar sesion ingresa un nombre de usuario");
+				   }else{
+				try{
+				x = m.Consultar(usuarioText.Text);
+				if(x!=null){
+					if(ContraseñaCorrecta(x)){
+						MessageBox.Show("USUARIO Legeado","Inicio de Sesion");
+						Form1 nuevoFormulario = new Form1(x.NombreUsuario);
+						nuevoFormulario.ShowDialog();
+						this.Close();
+					
+					}else{
+						MessageBox.Show("USUARIO No Legeado","Contraseña Incorrecta");
+					}}
+					
+				} catch(Exception ex){
+					MessageBox.Show("El Usuario no se encuentra registrado", "Busqueda", MessageBoxButtons.OK);
+				   	}					}
+			}
+    {
+		}
 	}
-}
+	}}

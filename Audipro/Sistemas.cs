@@ -15,15 +15,14 @@ namespace Audipro
 	{
 		private List<Sistema> _datos;
 		public List<Sistema> Datos { get { return _datos;} set { _datos = value;}}
-		private String _archivo = @"Archivo.txt";
-		private Char _separador = ',';
-		private String _salto = "\r\n";
+		private String _archivo = @"Sistemas.txt";
+
 		
 		public Sistemas()
 		{
 			_datos = new List<Sistema>(); //crear la lista
-			_datos.Add( new Sistema("Sistema 1","Tesla", "Calle Mis amores", "j0132456432", new DateTime(2023,5,2), new DateTime(2024,5,2)));
-			_datos.Add( new Sistema("Sistema Grande","Unloked", "Los Leones", "j053245644", new DateTime(2023,5,2), new DateTime(2024,5,2)));			
+			//_datos.Add( new Sistema("Sistema 1","Tesla", "Calle Mis amores", "j0132456432", new DateTime(2023,5,2), new DateTime(2024,5,2), new List<Int16>(){1,5,6}));
+			//_datos.Add( new Sistema("Sistema Grande","Unloked", "Los Leones", "j053245644", new DateTime(2023,5,2), new DateTime(2024,5,2), new List<Int16>(){2,3,4}));
 		}
 		
 		public void Guardar()
@@ -33,37 +32,44 @@ namespace Audipro
 			BinaryWriter _streamDatos = new BinaryWriter(_archivoCreado, Encoding.UTF8);
 			foreach (Sistema _j in _datos)
 			{
-				Console.WriteLine(_j);
-				Linea_Sistema(_streamDatos, _j);
+				
+				ConvertirBinario(_streamDatos, _j);
 			}
 			_streamDatos.Close();
-			MessageBox.Show("Componentes guardados en el Archivo Componente_01.txt","Salida");
+	
 		}
-		
-		private String Escribir(Sistema objeto) 
-		{
-			String w = "";
-			String _t = _separador.ToString().Trim();
-			w = objeto.NombreSistema +_t + objeto.NombreEmpresa;
-			w+=	_t + objeto.DireccionEmpresa + _t + objeto.RifEmpresa + _t + objeto.FechaInicio.ToString("s");
-			w+= _t + objeto.FechaFinal.ToString("s");
-
-			return w;
-		}
-		
-		
-		
+			
 		public void Recuperar()
 		{
 			_datos.Clear();
 			FileStream _archivoCreado = new FileStream(_archivo,FileMode.Open);
 			BinaryReader _streamDatos = new BinaryReader(_archivoCreado, Encoding.UTF8);
-			_datos.Add(Leer(_streamDatos));
+			while(true){
+			
+				try{
+					_datos.Add(Leer(_streamDatos));
+				}
+				catch (EndOfStreamException)
+        {
+            // Se lanza EndOfStreamException cuando se intenta leer más allá del final del archivo.
+            // Esto indica que hemos leído todos los objetos. Salir del bucle.
+            break; // Salir del bucle while
+        }
+        catch (IOException e)
+        {
+            Console.WriteLine("Error de E/S durante la lectura: {e.Message}");
+            // Manejar errores de lectura dentro del bucle, si es necesario
+            break; // o puedes optar por continuar, dependiendo de cómo quieras manejar errores
+        }
+			
+			
+		}
 			_streamDatos.Close();
 		}
 		
-		public void Linea_Sistema(BinaryWriter streameDatos, Sistema x)
+		public void ConvertirBinario(BinaryWriter streameDatos, Sistema x)
 		{
+			
 			streameDatos.Write(x.NombreSistema);
 			streameDatos.Write(x.NombreEmpresa);
 			streameDatos.Write(x.DireccionEmpresa);
@@ -74,6 +80,10 @@ namespace Audipro
 			streameDatos.Write(x.FechaFinal.Day);
 			streameDatos.Write(x.FechaFinal.Month);
 			streameDatos.Write(x.FechaFinal.Year);
+			streameDatos.Write(x.CantidadProcesos);
+			for (int i = 0; i < x.CantidadProcesos; i++) {
+				streameDatos.Write(x.Procesos[i]);
+			}
 		
 		}
 		
@@ -82,6 +92,7 @@ namespace Audipro
 		{
 		
 			Int32 dI,mI,aI,dF,mF,aF;
+			
 			
 			Sistema h = new Sistema();
 			h.NombreSistema = x.ReadString();
@@ -94,11 +105,46 @@ namespace Audipro
 			dF= x.ReadInt32();
 			mF= x.ReadInt32();
 			aF= x.ReadInt32();
+			h.CantidadProcesos = x.ReadInt16();
+			Console.WriteLine("la cantidad de procesos del sistema " + h.NombreSistema+" es "+h.CantidadProcesos);
+			for (int i = 0; i < h.CantidadProcesos; i++) {
+				
+				h.Procesos.Add(x.ReadInt16());
+			}
+			
 			h.FechaInicio = new DateTime(aI,mI,dI);
 			h.FechaFinal =new DateTime(aF,mF,dF);
 			
 		
 			return h;
+		}
+		
+		public void agregarProcesoASistema(Int16 x, String rif){
+			foreach(Sistema y in _datos){
+				if(y.RifEmpresa==rif){
+					y.AgregarProceso(x);
+				}
+			}
+			Guardar();
+			Recuperar();
+		}
+		
+		public void agregarSistema(Sistema x){
+			if(fechasCorrectas(x)){
+				_datos.Add(x);
+				Guardar();
+			}else{
+				MessageBox.Show("La fecha final debe ser mayor que la fecha inicial","Incongruencia en las fechas",MessageBoxButtons.OK);
+			}
+			
+		}
+		
+		private Boolean fechasCorrectas(Sistema x){
+			if(x.FechaFinal > x.FechaInicio){
+				return true;
+			}else{
+				return false;
+			}
 		}
 		
 		private DateTime Fecha(String l)
@@ -109,18 +155,49 @@ namespace Audipro
 			DateTime u = new DateTime(año,mes,dia);
 			return u;
 		}
-		
-		public String Mostrar()
-		{
-			String w = "";
-			foreach (Sistema _j in _datos)
-			{
-				w = w + Escribir(_j) + _salto; 
+
+		public bool existe(String x){
+		foreach (Sistema y in _datos) {
+			if(y.RifEmpresa == x){
+				MessageBox.Show("El Rif del sitema ya se encuentra registrado");
+				return true;
 			}
-			return w;
+		}
+		return false;
+	}
+
+		public Sistema Consultar(String x){
+			Sistema h = null;
+			foreach(Sistema y in _datos){
+				if(y.RifEmpresa == x){
+					h=y;
+					break;
+				}
+			}
+			if(h==null){
+				MessageBox.Show("Sistema no encontrado23","Sin coincidencias");
+				return h;
+			}
+			return h;
 		}
 		
-		
+		public void ActualizarSistema(Sistema x, String y){
+			
+			foreach(Sistema h in _datos){
+				if(h.RifEmpresa== y){
+					h.NombreSistema = x.NombreSistema;
+					h.NombreEmpresa = x.NombreEmpresa;
+					h.DireccionEmpresa = x.DireccionEmpresa;
+					h.FechaInicio = x.FechaInicio;
+					h.FechaFinal = x.FechaFinal;
+					h.Procesos = x.Procesos;
+					MessageBox.Show("Sistema Actualizado con Exito","Actualizacion Completa");
+					Guardar();
+					break;
+				}
+			}
+			
+		}
 		
 	}
 }
