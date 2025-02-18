@@ -50,10 +50,17 @@ namespace Audipro
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.label2 = new System.Windows.Forms.Label();
 			this.panelContenedor = new System.Windows.Forms.Panel();
+			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.TopPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.panel1.SuspendLayout();
 			this.panel3.SuspendLayout();
+			this.panelContenedor.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// TopPanel
@@ -228,11 +235,63 @@ namespace Audipro
 			// panelContenedor
 			// 
 			this.panelContenedor.BackColor = System.Drawing.Color.White;
+			this.panelContenedor.Controls.Add(this.tableLayoutPanel1);
+			this.panelContenedor.Controls.Add(this.label4);
+			this.panelContenedor.Controls.Add(this.label3);
 			this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelContenedor.Location = new System.Drawing.Point(200, 43);
 			this.panelContenedor.Name = "panelContenedor";
 			this.panelContenedor.Size = new System.Drawing.Size(648, 657);
 			this.panelContenedor.TabIndex = 3;
+			// 
+			// pictureBox2
+			// 
+			this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+			this.pictureBox2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.InitialImage")));
+			this.pictureBox2.Location = new System.Drawing.Point(225, 3);
+			this.pictureBox2.Name = "pictureBox2";
+			this.pictureBox2.Size = new System.Drawing.Size(230, 207);
+			this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.pictureBox2.TabIndex = 5;
+			this.pictureBox2.TabStop = false;
+			// 
+			// label3
+			// 
+			this.label3.Dock = System.Windows.Forms.DockStyle.Top;
+			this.label3.Font = new System.Drawing.Font("Nunito Sans Normal Black", 26F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(0, 0);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(648, 358);
+			this.label3.TabIndex = 4;
+			this.label3.Text = "Audipro";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label4
+			// 
+			this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.label4.Font = new System.Drawing.Font("Nunito Sans Normal Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.Location = new System.Drawing.Point(0, 493);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(648, 164);
+			this.label4.TabIndex = 6;
+			this.label4.Text = "Sistema de Gestion de Auditorias";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// tableLayoutPanel1
+			// 
+			this.tableLayoutPanel1.ColumnCount = 3;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.26087F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.73913F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187F));
+			this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 1, 0);
+			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 358);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 1;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(648, 213);
+			this.tableLayoutPanel1.TabIndex = 7;
 			// 
 			// Form1
 			// 
@@ -254,8 +313,15 @@ namespace Audipro
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.panel1.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);
+			this.panelContenedor.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+			this.tableLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.PictureBox pictureBox2;
+		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Button procesosMenuBtn;
 		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.Label label2;

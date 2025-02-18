@@ -158,13 +158,13 @@ tableLayoutPanelMain.Anchor = AnchorStyles.None;
 			if(!labelContraseña.Visible){
 				labelUsuario2.Visible=true;
 			labelContraseña.Visible = true;
-			}else{
+			}
 			
 			if(String.IsNullOrWhiteSpace(usuarioText.Text)||String.IsNullOrWhiteSpace(contraseñaText.Text))
 			{
 			   	MessageBox.Show("Debe Rellenar todos los campos", "Campos faltantes");
 			   	
-			}else if(usuarioText.Text.Contains("")){
+			}else if(usuarioText.Text.Contains(" ")){
 			         MessageBox.Show("El nombre de usuario no debe tener espacios en blanco");
 			         }else{
 				
@@ -172,13 +172,16 @@ tableLayoutPanelMain.Anchor = AnchorStyles.None;
 			
 				if(FormatoDeCodigoCorrecto(contraseñaText.Text) && !m.existe(usuarioText.Text)){
 				   	m.Datos.Add(new Usuario(usuarioText.Text,contraseñaText.Text));
-				   	            m.Guardar();
+				   	MessageBox.Show("Usuario " + usuarioText.Text +" creado satisfactoriamente");
+				   	           
+				   	LimpiarInputs();
+				   	m.Guardar();
 				   	            m.Recuperar();
 				   }
 				   
 			}
 			
-			}}
+			}
 		
 		void TableLayoutPanelMainPaint(object sender, PaintEventArgs e)
 		{
@@ -208,6 +211,13 @@ tableLayoutPanelMain.Anchor = AnchorStyles.None;
 		void Button2Click(object sender, EventArgs e)
 		{
 			this.Close();
+		}
+		
+		void LimpiarInputs(){
+			usuarioText.Text="";
+			contraseñaText.Text="";
+			labelContraseña.Visible=false;
+			labelUsuario2.Visible=false;
 		}
 		
 		void ContraseñaTextKeyPress(object sender, KeyPressEventArgs e)
