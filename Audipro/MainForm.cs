@@ -51,7 +51,7 @@ tableLayoutPanelMain.Anchor = AnchorStyles.None;
     e.Graphics.FillRectangle(gradientBrush, rect);
 }
 		
-		
+	
 		void BotonInicioClick(object sender, System.EventArgs e)
 		{
 				
@@ -120,11 +120,11 @@ tableLayoutPanelMain.Anchor = AnchorStyles.None;
 		
 		bool ContraseñaCorrecta(Usuario x){
 			if(x.ContraseñaUsuario == contraseñaText.Text){
-				MessageBox.Show("Contraseña Correcta","Error");
+				MessageBox.Show("Contraseña Correcta","Login Exitoso");
 				return true;
 			}else {
 				
-				MessageBox.Show(x.ContraseñaUsuario,"Error");
+				MessageBox.Show("La contraseña es incorrecta"+ " Contraseña es: " +x.ContraseñaUsuario,"La contraseña para ingresar");
 				return false;
 			}
 		}
@@ -173,10 +173,16 @@ tableLayoutPanelMain.Anchor = AnchorStyles.None;
 				if(FormatoDeCodigoCorrecto(contraseñaText.Text) && !m.existe(usuarioText.Text)){
 				   	m.Datos.Add(new Usuario(usuarioText.Text,contraseñaText.Text));
 				   	MessageBox.Show("Usuario " + usuarioText.Text +" creado satisfactoriamente");
-				   	           
-				   	LimpiarInputs();
+					String nombre = usuarioText.Text;
+					if (nombre == null)
+						return;
+	LimpiarInputs();
 				   	m.Guardar();
-				   	            m.Recuperar();
+				   	            m.Recuperar();				   	
+				   	Form1 nuevoFormulario = new Form1(nombre);
+						nuevoFormulario.ShowDialog();
+						this.Close();           
+				   
 				   }
 				   
 			}

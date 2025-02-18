@@ -139,10 +139,11 @@ namespace Audipro
 			
 		}
 		
-		private Boolean fechasCorrectas(Sistema x){
+		public Boolean fechasCorrectas(Sistema x){
 			if(x.FechaFinal > x.FechaInicio){
 				return true;
 			}else{
+				MessageBox.Show("La fecha final debe ser mayor que la fecha inicial","Incongruencia en las fechas",MessageBoxButtons.OK);
 				return false;
 			}
 		}

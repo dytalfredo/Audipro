@@ -48,7 +48,7 @@ namespace Audipro
 		
 		void RegistrarBtnClick(object sender, EventArgs e)
 		{
-			if(CamposCompletos("Registro")&&!datos.existe(rifText.Text)){
+			if(CamposCompletos("Registro")&&!datos.existe(rifText.Text)&&datos.fechasCorrectas(CrearSistema())){
 			   	datos.agregarSistema(CrearSistema());
 			   	LimpiarInputs();
 			   	MessageBox.Show("Sistema: "+CrearSistema().NombreSistema + "Creado con exito","Registro Completado",MessageBoxButtons.OK);
@@ -73,7 +73,7 @@ namespace Audipro
 			
 			panelUltimosSistemas.Controls.Clear();
 			
-			Int16 maximos= 10;
+			Int16 maximos= 20;
 			Int16 contador=0;
 			
 			foreach(Sistema y in datos.Datos){
